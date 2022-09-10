@@ -27,16 +27,16 @@ import java.util.Set;
 
 @Service
 public class BlueprintsServices {
-   
+
     @Autowired
     private BlueprintsPersistence bpp;
     @Autowired
     private bluePrintsFilters bpf;
-    
+
     public void addNewBlueprint(Blueprint bp)throws BlueprintPersistenceException{
         bpp.saveBlueprint(bp);
     }
-    
+
     public Set<Blueprint> getAllBlueprints(){
         Set<Blueprint> filterBlueprints = new HashSet<>();
         for (Blueprint bp: bpp.getAllBlueprints()) {
@@ -45,9 +45,9 @@ public class BlueprintsServices {
         }
         return filterBlueprints;
     }
-    
+
     /**
-     * 
+     *
      * @param author blueprint's author
      * @param name blueprint's name
      * @return the blueprint of the given name created by the given author
@@ -64,22 +64,25 @@ public class BlueprintsServices {
         }
         return null;
     }
-    
+
     /**
-     * 
+     *
      * @param author blueprint's author
      * @return all the blueprints of the given author
      * @throws BlueprintNotFoundException if the given author doesn't exist
      */
-    @GetMapping("/blueprints/{author}")
-    @ResponseBody
+
     public Set<Blueprint> getBlueprintsByAuthor(@PathVariable("author") String author) throws BlueprintNotFoundException{
-        if(bpp.getBlueprintsByAuthor(author) != null){
-            Set<Blueprint> bpResult= bpp.getBlueprintsByAuthor(author);
-            return bpf.filterByAuthor(bpResult);
-        }else{
-            throw new BlueprintNotFoundException("The given author doesn´t exist");
-        }
+        try {
+            if (bpp.getBlueprintsByAuthor(author) != null) {
+                Set<Blueprint> bpResult = bpp.getBlueprintsByAuthor(author);
+                return bpf.filterByAuthor(bpResult);
+            }
+        }catch(BlueprintNotFoundException ex){
+
+         }
+
+        return null;
     }
-    
+
 }
