@@ -1,0 +1,5 @@
+Qué condiciones de carrera se podrían presentar?
+Cuando se agrega el plano, hay una condición de carrera porque al agregar y consultar los planos no se está garantizando que las modificaciones se realizan de forma segura.
+Cuales son las respectivas regiones críticas?
+Cuando se quiere acceder a la lista de los planos, este se vuelve una región crítica cuando se desea consultar, actualizar o agregar.
+
