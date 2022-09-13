@@ -91,10 +91,19 @@ public class Blueprint {
                 return false;
             }
         }
-        
         return true;
     }
-    
-    
-    
+
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setPoints(List<Point> points) {
+        this.points = points;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

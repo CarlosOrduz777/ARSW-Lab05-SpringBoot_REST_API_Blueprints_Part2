@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,8 +34,12 @@ public class BlueprintsServices {
     @Autowired
     private bluePrintsFilters bpf;
 
-    public void addNewBlueprint(Blueprint bp)throws BlueprintPersistenceException{
-        bpp.saveBlueprint(bp);
+    public void addNewBlueprint(Blueprint bp){
+        try {
+            bpp.saveBlueprint(bp);
+        } catch (BlueprintPersistenceException e) {
+            e.printStackTrace();
+        }
     }
 
     public Set<Blueprint> getAllBlueprints(){
@@ -84,5 +89,10 @@ public class BlueprintsServices {
 
         return null;
     }
+
+    public Blueprint updateBluePrint(Blueprint blueprintToUpdate,String author,String name) {
+        return bpp.updateBluePrint(blueprintToUpdate,author,name);
+    }
+
 
 }

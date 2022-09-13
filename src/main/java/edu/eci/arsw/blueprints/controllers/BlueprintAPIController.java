@@ -53,6 +53,17 @@ public class BlueprintAPIController {
 
     }
 
+    @PostMapping("/addBlueprint")
+    public ResponseEntity<Blueprint> postBlueprint(@RequestBody Blueprint bp){
+        blueprintsServices.addNewBlueprint(bp);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PutMapping("/addBlueprint/{author}/{bpname}")
+    public ResponseEntity<Blueprint> replaceBlueprint(@RequestBody Blueprint blueprintUpdate,@PathVariable String author,@PathVariable String bpname){
+        blueprintsServices.updateBluePrint(blueprintUpdate,author,bpname);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
 }
 

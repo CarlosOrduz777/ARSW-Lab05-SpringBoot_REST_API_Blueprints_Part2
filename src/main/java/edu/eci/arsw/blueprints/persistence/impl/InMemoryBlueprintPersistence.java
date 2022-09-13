@@ -52,7 +52,7 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         }
         else{
             blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
-        }        
+        }
     }
 
     @Override
@@ -75,6 +75,19 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         return new HashSet<>(blueprints.values());
     }
 
+    @Override
+    public Blueprint updateBluePrint(Blueprint blueprintToUpdate,String author,String name) {
+        for (Blueprint bp: getAllBlueprints()) {
+            System.out.println("Blueprint:--------------"+ bp.toString());
+        }
+        System.out.println("----------------"+blueprintToUpdate.toString()+"....................................");
+        Blueprint bp  = getAllBlueprints().stream().filter(bps -> (bps.getName().equals(blueprintToUpdate.getName()) && bps.getAuthor().equals(blueprintToUpdate.getAuthor()))).findAny().get();
+
+
+        bp.setAuthor(author);
+        bp.setName(name);
+        return bp;
+    }
     
     
 }
